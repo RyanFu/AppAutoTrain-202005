@@ -1,9 +1,10 @@
 from appium import webdriver
 
-from search_page import SearchPage
+from page.base_page import BasePage
+from page.search_page import SearchPage
 
 
-class MainPage:
+class MainPage(BasePage):
     def __init__(self):
         caps = {}
         caps["platformName"] = "android"
@@ -17,7 +18,7 @@ class MainPage:
 
         self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", caps)
         self.driver.implicitly_wait(10)
-        # self.driver.find_element_by_id("tv_agree").click()
+        # self.find_by_id("tv_agree").click()
     def to_search(self):
-        self.driver.find_element_by_id("home_search").click()
+        self.find_by_id("home_search").click()
         return SearchPage(self.driver)
